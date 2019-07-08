@@ -1,0 +1,8 @@
+{
+  "name": "gitlostBR",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/gmonteeeiro/gitlostBR.git",
+  "author": "Gabriel Monteiro <gmonteeeiro@gmail.com>",
+  "license": "MIT"
+}
