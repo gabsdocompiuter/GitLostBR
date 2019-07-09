@@ -14,28 +14,18 @@ async function bot(callback){
 
     console.log('Buscando commits...');
     await delayedLoop(numberOfWords, 3000, (word) => {
-        // console.log(word);
 
         getLog(word, response => {
             if(response.total_count != null && response.total_count > 0){
                 response.items.map(item => {
-                    // if(item.commit.author.date > lastCommit.date){
-                        lastCommit.date = item.commit.author.date;
-                        lastCommit.message = item.commit.message;
-
-                        console.log('commit: ', lastCommit.message);
-                    // }
+                    callback(item.commit.message);
                 });
             }
             else{
-                console.error(response);
+                // console.error(response);
             }
         });
-
-        // console.log();
-        // console.log();
     });
-    // console.log('Ultimo commit: ', lastCommit.message);
 
     async function delayedLoop(times, waitTime, callbackFunction){
         let i = 0;
