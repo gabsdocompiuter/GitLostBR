@@ -1,9 +1,11 @@
 const fs = require('fs');
-// const githubBot = require('./src/githubBot');
+const githubBot = require('./src/githubBot');
 // const twBot = require('./src/twBot');
 
 async function start(){
     createLastCommitFile();
+
+    githubBot();
 }
 
 function createLastCommitFile(){
