@@ -62,3 +62,7 @@ typings/
 
 #Credentials
 */credentials/*.json
+
+#Last Commit
+
+*/json/lastCommit.json
