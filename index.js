@@ -1,20 +1,26 @@
 const fs = require('fs');
 const githubBot = require('./src/githubBot');
-// const twBot = require('./src/twBot');
+
+const twTweet = require('./src/twitter/twTweet');
+const twSearch = require('./src/twitter/twSearch');
 
 async function start(){
-    createLastCommitFile();
-
-    githubBot();
+    await setInterval(readCommits, 10000);    
 }
 
-function createLastCommitFile(){
-    const file = './src/json/lastCommit.json';
-    const defValue = `{"date": "2000-01-01T00:00.00.000-00:00", "message": ""}`;
-
-    if(!fs.existsSync(file)){
-        fs.writeFile(file, defValue, err => {if (err) throw err});
-    }
+async function readCommits(){
+    githubBot(message => {
+        twSearch(message)
+            .then(resultSearch => {
+                if(resultSearch === null){
+                    console.log(`>> Tweeting commit... '${message}'`);
+                    twTweet(message);
+                }
+                else{
+                    console.log(`>> Commit already tweeted: '${message}'`);
+                }
+            });    
+    });
 }
 
 start();
