@@ -13,7 +13,7 @@ async function bot(callback){
 
     numberOfWords = wordsFilter.words.length;
 
-    await delayedLoop(numberOfWords, 3000, (word) => {
+    await delayedLoop(numberOfWords, 5000, (word) => {
 
         getLog(word, response => {
             if(response.total_count != null && response.total_count > 0){

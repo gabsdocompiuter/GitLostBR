@@ -5,7 +5,7 @@ const twTweet = require('./src/twitter/twTweet');
 const twSearch = require('./src/twitter/twSearch');
 
 async function start(){
-    await setInterval(readCommits, 10000);    
+    await setInterval(readCommits, 100000);    
 }
 
 async function readCommits(){
