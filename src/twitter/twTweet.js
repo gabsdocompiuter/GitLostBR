@@ -4,7 +4,7 @@ function bot(status){
     let twitter = tw();
 
     twitter.post('statuses/update', {
-        status
+        status: status
     });
 }
 
