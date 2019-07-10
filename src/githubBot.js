@@ -1,8 +1,9 @@
 const fetch = require("node-fetch");
 const wordsFilter = require('./json/filterWords.json');
-const lastCommit = require('./json/lastCommit.json');
 
 async function bot(callback){
+    console.log(`>> Getting commits...`);
+
     let requestInfo = {
         method: 'GET',
         headers: {
@@ -12,7 +13,6 @@ async function bot(callback){
 
     numberOfWords = wordsFilter.words.length;
 
-    console.log('Buscando commits...');
     await delayedLoop(numberOfWords, 3000, (word) => {
 
         getLog(word, response => {
@@ -20,9 +20,6 @@ async function bot(callback){
                 response.items.map(item => {
                     callback(item.commit.message);
                 });
-            }
-            else{
-                // console.error(response);
             }
         });
     });
@@ -45,7 +42,7 @@ async function bot(callback){
     }
 
     async function getLog(word, callback){
-        let url = `https://api.github.com/search/commits?q=${word}+author-date:${getDate()}`;
+        let url = `https://api.github.com/search/commits?q=${word}+author-date:>=${getDate()}`;
         fetch(url, requestInfo)
             .then(r => r.json())
             .then(json => callback(json))
