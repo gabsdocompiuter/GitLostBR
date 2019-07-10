@@ -12,7 +12,7 @@ async function bot(status){
                 q: query,
                 count: 1
             }, (err, data, response) => {
-                if(data.statuses.length > 0){
+                if(data.statuses != null && data.statuses.length > 0){
                     resolve(data.statuses[0].text);
                 }
                 else{
