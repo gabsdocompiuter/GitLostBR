@@ -66,3 +66,4 @@ typings/
 #Last Commit
 
 */json/lastCommit.json
+build/*.exe
