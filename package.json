@@ -7,8 +7,8 @@
   "license": "MIT",
   "bin": "index.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon src/server",
+    "start": "node src/index",
+    "dev": "nodemon src/index",
     "build": "pkg -t win -o ./build/gitlostbr ./index.js"
   },
   "dependencies": {

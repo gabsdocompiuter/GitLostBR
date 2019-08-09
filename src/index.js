@@ -1,8 +1,8 @@
 const fs = require('fs');
-const githubBot = require('./src/githubBot');
+const githubBot = require('./githubBot');
 
-const twTweet = require('./src/twitter/twTweet');
-const twSearch = require('./src/twitter/twSearch');
+const twTweet = require('./twitter/twTweet');
+const twSearch = require('./twitter/twSearch');
 
 async function start(){
     await readCommits();
