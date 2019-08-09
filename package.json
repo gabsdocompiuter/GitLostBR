@@ -1,19 +1,21 @@
 {
-    "name": "gitlostbr",
-    "version": "1.0.0",
-    "main": "index.js",
-    "repository": "https://github.com/gmonteeeiro/gitlostBR.git",
-    "author": "Gabriel Monteiro <gmonteeeiro@gmail.com>",
-    "license": "MIT",
-    "bin": "index.js",
-
-    "scripts": {
-      "start": "node index",
-      "build": "pkg -t win -o ./build/gitlostbr ./index.js"
-    },
-    
-    "dependencies": {
-      "node-fetch": "^2.6.0",
-      "twit": "^2.2.11"
-    }
+  "name": "gitlostbr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/gmonteeeiro/gitlostBR.git",
+  "author": "Gabriel Monteiro <gmonteeeiro@gmail.com>",
+  "license": "MIT",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon src/server",
+    "build": "pkg -t win -o ./build/gitlostbr ./index.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
