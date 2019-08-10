@@ -1,6 +1,6 @@
 const githubAPI = require('../services/GithubAPI');
 
-const wordsFilter = require('../json/filterWords.json');
+const wordsFilter = require('../filterWords.json');
 
 module.exports = {
     async getCommits(){
@@ -37,7 +37,7 @@ module.exports = {
                     console.log(`   >> Houve um erro ao tentar obter os commits`);
                 });
 
-            console.log('> Aguandando para conectar novamente ao GitHub...');
+            console.log('> Aguardando para conectar novamente ao GitHub...');
             console.log();
         }, 10000)
 
