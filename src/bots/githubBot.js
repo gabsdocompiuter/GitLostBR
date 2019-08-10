@@ -17,24 +17,24 @@ module.exports = {
             })
                 .then((response) => {
                     if(response.data.items.length === 0){
-                        console.log(`  >> Nenhum commit encontrado...`)
+                        console.log(`   >> Nenhum commit encontrado...`)
                     }
         
                     response.data.items.map((item) => {
                         let commitMessage = item.commit.message;
                         
                         if(commitMessage.length > 100){
-                            console.log(`  >> Ignorando commit devido a seu tamanho...`)
+                            console.log(`   >> Ignorando commit devido a seu tamanho...`)
                         }
                         else{
-                            console.log(`  >> Adicionando commit '${commitMessage}' à lista...`);
+                            console.log(`   >> Adicionando commit '${commitMessage}' à lista...`);
                             messagesFound.push(commitMessage);
                         }
                     });
 
                 })
                 .catch((error) => {
-                    console.log(`  >> Houve um erro ao tentar obter os commits`);
+                    console.log(`   >> Houve um erro ao tentar obter os commits`);
                 });
 
             console.log('> Aguandando para conectar novamente ao GitHub...');
