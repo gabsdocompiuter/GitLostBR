@@ -1,11 +1,21 @@
 const ghBot = require('./bots/GithubBot');
 const twBot = require('./bots/TwitterBot');
+const wtBot = require('./bots/WatsonBot');
 
 async function start(){
-    const commits = await getCommits();
-    const messagesToTweet = await checkTweets(commits);
+    bot();
+    setInterval(bot, 600000);
 
-    await tweetCommits(messagesToTweet);
+    async function bot(){
+        const allCommits = await getCommits();
+        const newCommits = await checkTweets(allCommits);
+        const commitsToTweet = await filterPortugueseCommits(newCommits);
+
+        await tweetCommits(commitsToTweet);
+
+        console.log();
+        console.log(`>>>> Aguardando próxima interação com o bot...`)
+    }
 }
 
 async function waitEach(array, callback, time){
@@ -41,8 +51,26 @@ async function checkTweets(commits){
     return messagesToTweet;
 }
 
-async function tweetCommits(messagesToTweet){
-    await waitEach(messagesToTweet, async (currentMessage) => {
+async function filterPortugueseCommits(newCommits){
+    console.log();
+    console.log(`>>>> Filtrando commits em português...`);
+    console.log();
+
+    const portugueseCommits = [];
+
+    await waitEach(newCommits, async currentCommit => {
+        const result = await wtBot.filterPortugueseSentences(currentCommit);
+
+        if(result === true){
+            portugueseCommits.push(currentCommit);
+        }
+    }, 1000);
+
+    return portugueseCommits
+}
+
+async function tweetCommits(commitsToTweet){
+    await waitEach(commitsToTweet, async (currentMessage) => {
         await twBot.tweet(currentMessage);
     }, 5000);
 }
