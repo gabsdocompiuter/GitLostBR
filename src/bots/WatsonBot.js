@@ -14,13 +14,13 @@ module.exports = {
 
         const sentenceLanguage = await getSentenceLanguage(message);
         if(sentenceLanguage){
-            console.log(`   > Sentença verificada com a linguagem '${sentenceLanguage}'`);
+            console.log(`   >> Sentença verificada com a linguagem '${sentenceLanguage}'`);
             if(sentenceLanguage === 'pt'){
                 return true;
             }
         }
         else{
-            console.log('   > Houve um erro ao buscar informações sobre a sentença...');
+            console.log('   >> Houve um erro ao buscar informações sobre a sentença...');
         }
         return false;
     }
