@@ -1,52 +1,56 @@
-const fetch = require("node-fetch");
-const wordsFilter = require('./json/filterWords.json');
+const githubAPI = require('../services/GithubAPI');
 
-async function bot(callback){
-    console.log(`>> Getting commits...`);
+const wordsFilter = require('../json/filterWords.json');
 
-    let requestInfo = {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/vnd.github.cloak-preview',
-        }
-    };
+module.exports = {
+    async getCommits(){
+        const messagesFound = [];
 
-    numberOfWords = wordsFilter.words.length;
+        await waitEach(wordsFilter.words, async (word) => {
 
-    await delayedLoop(numberOfWords, 5000, (word) => {
+            console.log(`>> Procurando commits com a palavra '${word}'...`);
 
-        getLog(word, response => {
-            if(response.total_count != null && response.total_count > 0){
-                response.items.map(item => {
-                    callback(item.commit.message);
-                });
-            }
-        });
-    });
-
-    async function delayedLoop(times, waitTime, callbackFunction){
-        let i = 0;
-
-        loop();
-
-        function loop(){
-            setTimeout(() =>{
-                callbackFunction(wordsFilter.words[i]);
-
-                i++;
-                if(i < times){
-                    loop();
+            await githubAPI.get(`/search/commits?q=${word}+author-date:>=${getDate()}`, {
+                headers: {
+                    'Accept': 'application/vnd.github.cloak-preview',
                 }
-            }, waitTime);
-        }
-    }
+            })
+                .then((response) => {
+                    if(response.data.items.length === 0){
+                        console.log(`  >> Nenhum commit encontrado...`)
+                    }
+        
+                    response.data.items.map((item) => {
+                        let commitMessage = item.commit.message;
+                        
+                        if(commitMessage.length > 100){
+                            console.log(`  >> Ignorando commit devido a seu tamanho...`)
+                        }
+                        else{
+                            console.log(`  >> Adicionando commit '${commitMessage}' à lista...`);
+                            messagesFound.push(commitMessage);
+                        }
+                    });
 
-    async function getLog(word, callback){
-        let url = `https://api.github.com/search/commits?q=${word}+author-date:>=${getDate()}`;
-        fetch(url, requestInfo)
-            .then(r => r.json())
-            .then(json => callback(json))
-            .catch(err => console.error(err));
+                })
+                .catch((error) => {
+                    console.log(`  >> Houve um erro ao tentar obter os commits`);
+                });
+
+            console.log('> Aguandando para conectar novamente ao GitHub...');
+            console.log();
+        }, 10000)
+
+        return messagesFound;
+    }
+}
+
+async function waitEach(array, callback, time){
+    const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
+
+    for(let i = 0; i < array.length; i++){
+        await waitFor(time);
+        await callback(array[i], i, array);
     }
 }
 
@@ -63,5 +67,3 @@ function getDate(){
         return length == 1 ? `0${number}` : number;
     }
 }
-
-module.exports = bot;
