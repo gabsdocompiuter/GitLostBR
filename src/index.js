@@ -1,13 +1,16 @@
 const fs = require('fs');
-const ghBot = require('./bots/githubBot');
+const ghBot = require('./bots/GithubBot');
 
 // const twTweet = require('./bots/twitter/twTweet');
 // const twSearch = require('./bots/twitter/twSearch');
 
 async function start(){
-    await ghBot.getCommits()
-    // await readCommits();
-    // await setInterval(readCommits, 60000);    
+    const commits = await ghBot.getCommits()
+
+    commits.map((commit) => {
+        console.log(commit);
+        console.log();
+    })
 }
 
 async function readCommits(){
