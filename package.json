@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/index",
     "dev": "nodemon src/index",
-    "build": "pkg -t win -o ./build/gitlostbr ./index.js"
+    "build": "pkg -t win -o ./build/gitlostbr ./src/index.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
