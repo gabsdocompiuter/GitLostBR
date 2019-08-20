@@ -56,23 +56,6 @@ async function twSearch(query){
     }, (err, data, response) => {
         console.log('dentro do negócio')
         statusAlreadyTwiteed = true;
-        // console.log(err);
-        // console.log(data);
-        // console.log(response);
-
         
-    //     if(err){
-    //         console.log(`   >> Houve um erro ao pesquisar essa mensagem...`);
-    //     }
-    //     else{
-    //         if(data.statuses.length > 0){
-    //             console.log(`   >> Essa mensagem já foi twitada...`);
-
-    //             statusAlreadyTwiteed = true;
-    //         }
-    //         else{
-    //             console.log(`   >> Essa mensagem ainda não foi twitada...`);
-    //         }    
-    //     }
     });
 }
