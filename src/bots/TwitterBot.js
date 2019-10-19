@@ -13,6 +13,7 @@ module.exports = {
             .then(response => {
                 statusAlreadyTwiteed = response;
             })
+            .catch(error => console.error(error));
 
         return statusAlreadyTwiteed;
     },
@@ -48,14 +49,5 @@ async function twSearch(query){
                 }    
             }
         })
-    });
-
-    TwitterAPI.get('search/tweets', {
-        q: query,
-        count: 1
-    }, (err, data, response) => {
-        console.log('dentro do negócio')
-        statusAlreadyTwiteed = true;
-        
     });
 }
