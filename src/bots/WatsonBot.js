@@ -1,11 +1,9 @@
-const {apikey, url} = require('../credentials/watson-nlu.json');
-
 const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1.js');
 
 const nlu = new NaturalLanguageUnderstandingV1({
-    iam_apikey: apikey,
+    iam_apikey: process.env.WATSON_APIKEY,
     version: '2018-04-05',
-    url: url
+    url: process.env.WATSON_URL
 });
 
 module.exports = {

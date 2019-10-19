@@ -1,9 +1,8 @@
 const Twit = require('twit')
-const ttConfig = require('../credentials/twitter.json');
 
 module.exports = new Twit({
-    consumer_key: ttConfig.consumer_key,
-    consumer_secret: ttConfig.consumer_secret,
-    access_token: ttConfig.access_token,
-    access_token_secret: ttConfig.access_token_secret
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
