@@ -4,7 +4,7 @@ const wtBot = require('./bots/WatsonBot');
 
 async function start(){
     bot();
-    setInterval(bot, 600000);
+    setInterval(bot, 6000);
 
     async function bot(){
         const allCommits = await getCommits();

@@ -23,7 +23,7 @@ module.exports = {
                     response.data.items.map((item) => {
                         let commitMessage = item.commit.message;
                         
-                        if(commitMessage.length > 100){
+                        if(commitMessage.length > 200){
                             console.log(`   >> Ignorando commit devido a seu tamanho...`)
                         }
                         else{
@@ -34,12 +34,12 @@ module.exports = {
 
                 })
                 .catch((error) => {
-                    console.log(`   >> Houve um erro ao tentar obter os commits`);
+                    console.error(`   >> Houve um erro ao tentar obter os commits - ${error}`);
                 });
 
             console.log('> Aguardando para conectar novamente ao GitHub...');
             console.log();
-        }, 10000)
+        }, 5000)
 
         return messagesFound;
     }
