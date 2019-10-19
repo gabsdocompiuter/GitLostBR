@@ -11,8 +11,7 @@
   },
   "scripts": {
     "start": "node src/index",
-    "dev": "nodemon src/index",
-    "build": "pkg -t win -o ./build/gitlostbr ./src/index.js"
+    "dev": "nodemon src/index"
   },
   "dependencies": {
     "axios": "^0.19.0",
