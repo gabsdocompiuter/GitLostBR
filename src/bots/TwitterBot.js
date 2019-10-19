@@ -1,11 +1,10 @@
 const TwitterAPI = require('../services/TwitterAPI');
-const twConfig = require('../credentials/twitter');
 
 module.exports = {
     async search(statusToSearch){
         console.log(`>> Verificando se a mensagem já foi twitada... '${statusToSearch}'`);
 
-        const query = `"${statusToSearch}" (from:${twConfig.userId})`;
+        const query = `"${statusToSearch}" (from:${process.env.TWITTER_USER_ID})`;
 
         let statusAlreadyTwiteed = true;
 
