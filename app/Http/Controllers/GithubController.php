@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 
 class GithubController extends Controller
 {
@@ -16,16 +18,21 @@ class GithubController extends Controller
         ]);    
     }
     
-    public function search()
+    public function search($word)
     {
-        $uri = "search/commits?q=porra+author-date:%3E=2021-01-01";
+        try{
+            $today = $this->todayDate();
+            $uri = "search/commits?q=$word+author-date:%3E=$today";
 
-        $headers = ['Accept' => 'application/vnd.github.cloak-preview'];
-        $response = $this->client->request('GET', $uri, ['headers' => $headers]);
+            $headers = ['Accept' => 'application/vnd.github.cloak-preview'];
+            $response = $this->client->request('GET', $uri, ['headers' => $headers]);
 
-        $body = $response->getBody();
-        $stringBody = (string) $body;
-        dd($this->listMessages($stringBody));
+            $body = $response->getBody();
+            $stringBody = (string) $body;
+            return $this->listMessages($stringBody);
+        } catch (RequestException $e){
+            return [];
+        }
     }
 
     private function listMessages($githubBody){
@@ -47,5 +54,15 @@ class GithubController extends Controller
         }
 
         return $array;
+    }
+
+    private function todayDate(){
+        $today = getdate();
+
+        $year = $today['year'];
+        $month = str_pad($today['mon'], 2, '0', STR_PAD_LEFT);
+        $day = str_pad($today['mday'], 2, '0', STR_PAD_LEFT);
+
+        return "$year-$month-$day";
     }
 }

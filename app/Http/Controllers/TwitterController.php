@@ -5,29 +5,20 @@ use Twitter;
 
 class TwitterController extends Controller
 {
-    public function tweet()
+    public function tweet($text)
     {
-        return Twitter::postTweet(['status' => '[TESTE PORRA]esse bot vai ficar top', 'format' => 'json']);
-    }
-
-    public function getLastTweets(){
-        return Twitter::getUserTimeline(
-            [
-                'screen_name' => env('TWITTER_USER'),
-                'count' => 20,
-                'format' => 'json',
-            ]
-        );
+        return Twitter::postTweet([
+            'status' => $text,
+            'format' => 'json'
+        ]);
     }
 
     public function tweetPublished($tweet){
-        $array = json_decode(Twitter::getUserTimeline(
-            [
-                'screen_name' => env('TWITTER_USER'),
-                'count' => 20,
-                'format' => 'json'
-            ]
-        ));
+        $array = json_decode(Twitter::getUserTimeline([
+            'screen_name' => env('TWITTER_USER'),
+            'count' => 20,
+            'format' => 'json'
+        ]));
 
         foreach($array as $item){
             if($item->text == $tweet){
