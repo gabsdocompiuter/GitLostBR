@@ -18,4 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/teste-twitter', [Controllers\TwitterController::class, 'tweet']);
+Route::get('/teste-twitter-search', [Controllers\TwitterController::class, 'getLastTweets']);
 Route::get('/teste-github', [Controllers\GithubController::class, 'search']);
