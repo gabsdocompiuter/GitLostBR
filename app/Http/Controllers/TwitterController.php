@@ -7,6 +7,6 @@ class TwitterController extends Controller
 {
     public function tweet()
     {
-        return Twitter::postTweet(['status' => 'Postando pelo laravel', 'format' => 'json']);
+        return Twitter::postTweet(['status' => '[TESTE PORRA]esse bot vai ficar top', 'format' => 'json']);
     }
 }
