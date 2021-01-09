@@ -24,7 +24,7 @@ class BotCron extends Command
         $twitter = new TwitterController();
         $wordController = new WordController();
 
-        foreach($wordController->getWords() as $word){
+        foreach($wordController->getRandomWords(10) as $word){
             echo "> Palavra: $word";
             echo "\r\n";
 
@@ -50,7 +50,6 @@ class BotCron extends Command
             }
             
             echo "\r\n";
-            sleep(5);
         }
     }
 }
