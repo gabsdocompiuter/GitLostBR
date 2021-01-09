@@ -22,7 +22,7 @@ class WordController extends Controller
             "idiota",
             "idiotice",
             "imbecil",
-            "inferno",
+            // "inferno",
             "merda",
             "otario",
             "otaria",
