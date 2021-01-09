@@ -25,18 +25,31 @@ class BotCron extends Command
         $wordController = new WordController();
 
         foreach($wordController->getWords() as $word){
-            
+            echo "> Palavra: $word";
+            echo "\r\n";
+
             foreach($github->search($word) as $githubMessage){
                 $message = $githubMessage["message"];
+                echo "  > Commit: $message";
+                echo "\r\n";
+
                 try{
                     if(!$twitter->tweetPublished($message)){
+                        echo "    > Publicando tweet...";
+                        echo "\r\n";
                         $twitter->tweet($message);
                     }
+                    else{
+                        echo "    > Tweet já publicado";
+                        echo "\r\n";
+                    }
                 } catch(Exception $ex){
-
+                    echo "    > Erro utilizando api do Twitter";
+                    echo "\r\n";
                 }
             }
-
+            
+            echo "\r\n";
             sleep(5);
         }
     }

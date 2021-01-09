@@ -31,6 +31,9 @@ class GithubController extends Controller
             $stringBody = (string) $body;
             return $this->listMessages($stringBody);
         } catch (RequestException $e){
+            echo "  > Erro utilizado API do Github";
+            echo "\r\n";
+            
             return [];
         }
     }
