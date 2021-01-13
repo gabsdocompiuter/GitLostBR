@@ -24,7 +24,7 @@ class WordController extends Controller
             "buceta",
             "brioco",
             "broxa",
-            "cagado",
+            // "cagado",
             "caralho",
             "cassete",
             // "coco",
