@@ -33,19 +33,25 @@ class BotCron extends Command
                 echo "  > Commit: $message";
                 echo "\r\n";
 
-                try{
-                    if(!$twitter->tweetPublished($message)){
-                        echo "    > Publicando tweet...";
-                        echo "\r\n";
-                        $twitter->tweet($message);
-                    }
-                    else{
-                        echo "    > Tweet já publicado";
-                        echo "\r\n";
-                    }
-                } catch(Exception $ex){
-                    echo "    > Erro utilizando api do Twitter";
+                if(count(explode(" ", $message)) <= 1){
+                    echo "    > Não publicado pelo tamanho...";
                     echo "\r\n";
+                }
+                else{
+                    try{
+                        if(!$twitter->tweetPublished($message)){
+                            echo "    > Publicando tweet...";
+                            echo "\r\n";
+                            $twitter->tweet($message);
+                        }
+                        else{
+                            echo "    > Tweet já publicado";
+                            echo "\r\n";
+                        }
+                    } catch(Exception $ex){
+                        echo "    > Erro utilizando api do Twitter";
+                        echo "\r\n";
+                    }
                 }
             }
             
